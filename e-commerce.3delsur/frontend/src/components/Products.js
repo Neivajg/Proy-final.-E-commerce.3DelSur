@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+
 
 const Products =()=>{
     
@@ -8,13 +9,16 @@ const Products =()=>{
 
     const suma =()=>SetContador(contador +1);
     const resta=()=>SetContador(contador -1);
-
+    useEffect(() => {
+      fetch("http://localhost:5000/products", {method: 'GET'})
+          .then((response) => response.json())
+          .then((res) => console.log(res[2]))//me llegala bbdd para utilizar aun sin desplegar
+  }, []);
 
     return (
     <>
-        <h1>Productos</h1>
-        <p>Catalogo de productos por categorias</p>
-    <Card style={{ width: '18rem' }}>
+        <h1 style={{marginLeft:570, marginTop:20}}>Productos</h1>
+    <Card style={{ width: '18rem',marginLeft:50 }}>
       <Card.Img  src="/img.jpg" />
       <Card.Body>
         <Card.Title>Nombre producto</Card.Title>

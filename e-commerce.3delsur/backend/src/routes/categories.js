@@ -4,12 +4,12 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
     const Categories = await Category.find({})  
-
+    
     res.send(Categories)
 })
 
 router.post('/',validateBody, async (req, res) => {
-
+    
     const Categories = new Category(req.body)
    
     await Categories.save()
