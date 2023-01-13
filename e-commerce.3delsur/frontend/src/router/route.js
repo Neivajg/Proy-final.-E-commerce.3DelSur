@@ -6,6 +6,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../components/Home";
 import Products from "../components/Products";
 import  Contact  from "../components/Contact";
+import Registro from "../components/Registro";
+import Carrito from "../components/Carrito";
+
 import PublicLayout from "../loyaut.js/PublicLayout";
 
 
@@ -25,6 +28,14 @@ const router = createBrowserRouter([
           {
             path:"/contact",
             element:<Contact/>,
+          }, 
+          {
+            path:"/registro",
+            element:<Registro/>,
+          },  
+          {
+            path:"/carrito",
+            element:<Carrito/>,
           }
 ]}
 

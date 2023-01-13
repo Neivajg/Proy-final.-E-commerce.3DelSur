@@ -23,9 +23,8 @@ const removeImage = (cloudinaryId) => {
     const reqschema = Joi.object({
       name: Joi.string().required().messages({"any.required":`El campo NAME es requerido`}),
       price: Joi.number().required(),
-      imagen: Joi.string().required(),
       categoryId: Joi.objectId().required().messages({"any.required":`El campo CategoryId es requerido`,'object.base':`El campo "categoryId" debe se un objectId valido para mongo`}),
-      file: Joi.object().required().messages({"any.required": `El campo "image" es requerido`,}),
+      file: Joi.object().required().messages({"any.required": `El campo "imagen" es requerido`,}),
     })
     const VALID_IMAGE_TYPES = {
       "image/jpg": "jpg",

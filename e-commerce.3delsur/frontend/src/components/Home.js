@@ -12,7 +12,8 @@ const Home = ()=>{
     useEffect(() => {
         setHora(new Date().toLocaleTimeString());
     })
-              
+          
+
     return (
     <div> 
       <h3 style={{display:"flex", flexDirection: "column",marginLeft:550,padding:20,alignItems:"center",width:450,height:50,marginTop:20}}>Bienvenidos a 3DelSur</h3>     

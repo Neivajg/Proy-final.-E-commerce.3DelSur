@@ -1,4 +1,7 @@
-import { Container } from "react-bootstrap";
+import { MapContainer, TileLayer } from 'react-leaflet'
+import { Marker } from 'react-leaflet/Marker'
+
+
 
 const Contact =()=>{
     return (
@@ -21,15 +24,25 @@ const Contact =()=>{
           <textarea placeholder="Máximo 300 Caracteres.." maxLength={300} type="text" style={{marginTop:20, height:70,width:250}} />
           <button type="submit" style={{  height:40,width:50, borderRadius:5,marginTop:20}}>Send</button>
         </form>
-       
-        <p>Ubicación:</p>
-        <div>
-            <hr/>
-           Meter ubicacion con lieftet
-           <hr/>
-        </div>
+       <div style={{display:"grid",gridTemplateColumns:"repeat(2, 1fr)"}}>
+          <div style={{border:"1px solid black"}}>
+          <p>Ubicación:</p>
+          <MapContainer style={{height:300,witdh:300}} center={[51.505, -0.09]} zoom={1} scrollWheelZoom={false}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />  
+          <Marker position={[36.020076, -5.608353]}>
+          </Marker>
+      </MapContainer>
+    
+          </div>
+        <div style={{border:"1px solid black"}}>
+          Para más información :
         <p>Número Telefono: +34 669852145</p>
-        <p>Instagram:@3DelSur</p>
+         <img src="./instagram.jpg" alt="QR Instagram" style={{height:500,width:550}}></img>
+        </div>
+        </div>
     </div>
     </>
     )
