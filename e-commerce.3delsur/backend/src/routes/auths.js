@@ -16,7 +16,19 @@ const reqSchema = Joi.object({
     .messages({ "any.required": `El campo "password" es requerido` }),
 });
 
-router.post("/", validator(reqSchema), async (req, res) => {
+router.post("/login", validator(reqSchema), async (req, res) => {
+  console.log(req.body)
+  let user = await User.findOne({ email: req.body.email });
+  if (!user) return res.status(400).json({response:false});
+
+  const isValid = await bcrypt.compare(req.body.password, user.password);
+  if (!isValid) return res.status(400).json({response:false});
+
+  const token = user.generateToken();
+  res.header("x-auth-token", token).json({response:true});
+});
+
+router.post("/registro", validator(reqSchema), async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(400).send("Email y password invalidos");
 

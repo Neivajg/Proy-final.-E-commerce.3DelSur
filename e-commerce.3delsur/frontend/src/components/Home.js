@@ -1,18 +1,5 @@
-import React, { useState, useEffect } from "react";
-
-
-function Reloj({hora}) {
-    return <h4>{hora}</h4>
-}
 
 const Home = ()=>{
-
-    const [hora, setHora] = useState(new Date().toLocaleTimeString());
-
-    useEffect(() => {
-        setHora(new Date().toLocaleTimeString());
-    })
-          
 
     return (
     <div> 
@@ -24,7 +11,7 @@ const Home = ()=>{
        Un mundo de diseño te Espera en 3DelSur.
           </p>
        
-        <h4 style={{color:"pink"}}><Reloj hora={hora}/></h4>
+       
     </div>
    
     )
