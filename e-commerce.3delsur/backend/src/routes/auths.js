@@ -25,18 +25,19 @@ router.post("/login", validator(reqSchema), async (req, res) => {
   if (!isValid) return res.status(400).json({response:false});
 
   const token = user.generateToken();
-  res.header("x-auth-token", token).json({response:true});
+  res.header("x-auth-token", token).header('Access-Control-Expose-Headers', 'x-auth-token').json({response:true});
 });
 
-router.post("/registro", validator(reqSchema), async (req, res) => {
-  let user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send("Email y password invalidos");
+// router.post("/registro", validator(reqSchema), async (req, res) => {
+//   console.log("enpoint")
+//   let user = await User.findOne({ email: req.body.email });
+//   if (!user) return res.status(400).send("Email y password invalidos");
 
-  const isValid = await bcrypt.compare(req.body.password, user.password);
-  if (!isValid) return res.status(400).send("Email y password invalidos");
+//   const isValid = await bcrypt.compare(req.body.password, user.password);
+//   if (!isValid) return res.status(400).send("Email y password invalidos");
 
-  const token = user.generateToken();
-  res.header("x-auth-token", token).send("Usuario autentificado");
-});
+//   const token = user.generateToken();
+//   res.header("x-auth-token", token).header('access-control-expose-headers', 'x-auth-token').send("Usuario autentificado");
+// });
 
 module.exports = router;

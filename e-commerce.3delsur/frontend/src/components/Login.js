@@ -1,33 +1,49 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import ContextoLogin from '../contextlogin';
 
-const Login=({handleShow, show}) =>{
+const Login=({handleShow,show,handleClose}) =>{
  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  
+  const [login,setLogin]=useContext(ContextoLogin)
+ 
+
   console.log(email)
 
 
  const handlerButton=(event)=>{
   event.preventDefault()
   console.log(email)
-    fetch("http://localhost:5000/auths/login", { method: 'POST', body: JSON.stringify({email:email,password:password}),   headers: {
+    fetch("http://localhost:5000/auths/login", { method: 'POST', body: JSON.stringify({email:email,password:password}),  mode: 'cors', headers: {
       'Content-Type': 'application/json'
     }, })
-      .then((response) => response.json())
-      .then((res) => { if(res.response == true){
-        alert("login correcto")
-        sessionStorage.setItem("usuariologueado",true)
-      }else{
-        alert("Usuario No registrado :/")
-      }
+      .then((response) => {
+        
+        const token = response.headers.get('x-auth-token')
+
+        localStorage.setItem('token', token)
+        return response.json()
+      
+      })
+      .then((res) => { 
+        
+        if(res.response == true){
+          setLogin(true)
+          localStorage.setItem("usuariologueado",true)
+        }else{
+          alert("Usuario No registrado :/")
+        }
         console.log( res)
       })
   }
 
+
   return (
     <>
-      <Offcanvas show={show} placement="end" onHide={handleShow} >
+      <Offcanvas show={show} placement="end" onHide={handleClose} >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>LOGIN</Offcanvas.Title>
         </Offcanvas.Header>

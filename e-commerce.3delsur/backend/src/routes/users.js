@@ -9,7 +9,8 @@ router.get('/', async (req, res) => {
     res.send(users)
 })
 
-router.post('/',validateBody, async (req, res) => {
+router.post('/registro',validateBody, async (req, res) => {
+    console.log("entraa")
     
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("El usuario ya está registrado");
@@ -24,14 +25,14 @@ router.post('/',validateBody, async (req, res) => {
   await user.save();
 
   const token = user.generateToken();
-  res.header("x-auth-token", token).send("Usuario autentificado");
+  res.header("x-auth-token", token).header('access-control-expose-headers', 'x-auth-token').send("Usuario autentificado");
 })
 
 
-router.delete('/:id', async (req, res) => {
-    const users = await User.findByIdAndDelete(req.params.id)
+// router.delete('/:id', async (req, res) => {
+//     const users = await User.findByIdAndDelete(req.params.id)
 
-    res.send(users)
-})
+//     res.send(users)
+// })
 
 module.exports = router

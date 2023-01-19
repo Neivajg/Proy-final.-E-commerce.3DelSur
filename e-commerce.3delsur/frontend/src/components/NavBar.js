@@ -2,22 +2,25 @@ import { NavLink, Link } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Login from "./Login";
+import ContextoLogin from '../contextlogin';
+import Badge from 'react-bootstrap/Badge';
+import ContextoCarrito from '../context';
 
 
 
 export default function NavBar() {
-  const [login,setLogin]= useState(false);
-  const [show, setShow] = useState(false);
+  const [login,setLogin]=useContext(ContextoLogin)
 
-  const handleShow = () => {
-    if (show){
-      setShow(false)
-    } else {
-      setShow(true)
-    }
-  }
+  const [show, setShow] = useState(false);
+  const [items,SetItems]=useContext(ContextoCarrito)
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleLogut=()=> setLogin(false)
+  
 
   return (
 
@@ -43,24 +46,26 @@ export default function NavBar() {
           <input
               type="checkbox"
               label="True/False"
-              value={login}
+              value={show}
               onClick={(e) => setLogin(e.target.checked)}
               style={{color: 'white'}}
             />
+
           {!login
           ? <NavLink className="nav-link" style={{marginLeft:900}} onClick={handleShow}>Login</NavLink>   
-          : <NavLink className="nav-link" style={{marginLeft:900}} >Logout</NavLink>
+          : <NavLink onClick={handleLogut}  className="nav-link" style={{marginLeft:900}} >Logout</NavLink>
         }
         {!login
           ? <NavLink className="nav-link" to={`/registro`}>Registrarse</NavLink>
           : null
         }
-        {!show
-        ? null : <Login handleShow={handleShow} show={show}/>
+        {!login
+          ?<Login handleShow={handleShow} handleClose={handleClose} show={show}/> 
+         : null
         }
         
           <NavLink className="nav-link"  to={`/carrito`} >
-          carrito
+          carrito<Badge bg="secondary">{items.length}</Badge>
           </NavLink>
           </Nav>
         </Container>
