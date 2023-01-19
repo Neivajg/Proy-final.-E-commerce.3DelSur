@@ -45,7 +45,7 @@ const Products = () => {
   
   <div style={{display:"grid",gridTemplateColumns:"repeat(4, 1fr)", gap:20, marginInline:30}}>
     {productos.map((e, index)=> (
-      <Card key={productos.id} style={{ width: '18rem', marginLeft: 50,boxShadow:"0px 0px 5px 1px black",padding:20,alignItems:"center",marginTop:30}}>
+      <Card key={e._id} style={{ width: '18rem', marginLeft: 50,boxShadow:"0px 0px 5px 1px black",padding:20,alignItems:"center",marginTop:30}}>
         <Card.Img src={e.imagen} style={{width:250 , height:300}} />
         <Card.Body>
           <Card.Title>{e.name}</Card.Title>

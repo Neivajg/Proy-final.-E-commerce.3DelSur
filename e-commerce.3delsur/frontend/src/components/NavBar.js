@@ -2,7 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useState, useContext } from "react";
+import { useState, useContext} from "react";
 import Login from "./Login";
 import ContextoLogin from '../contextlogin';
 import Badge from 'react-bootstrap/Badge';
@@ -20,6 +20,7 @@ export default function NavBar() {
   const handleShow = () => setShow(true);
 
   const handleLogut=()=> setLogin(false)
+  
   
 
   return (
@@ -43,16 +44,9 @@ export default function NavBar() {
         <NavLink className="nav-link" to={`/contact`}>
           Contacto
           </NavLink>
-          <input
-              type="checkbox"
-              label="True/False"
-              value={show}
-              onClick={(e) => setLogin(e.target.checked)}
-              style={{color: 'white'}}
-            />
 
-          {!login
-          ? <NavLink className="nav-link" style={{marginLeft:900}} onClick={handleShow}>Login</NavLink>   
+        {!login
+          ? <NavLink className="nav-link" style={{marginLeft:900}} onClick={handleShow}>Login</NavLink>
           : <NavLink onClick={handleLogut}  className="nav-link" style={{marginLeft:900}} >Logout</NavLink>
         }
         {!login
