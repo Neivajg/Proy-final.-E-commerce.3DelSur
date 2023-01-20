@@ -55,7 +55,7 @@ const Carrito =()=>{
      <>
        <div style={{display:"grid",gridTemplateColumns:"repeat(2, 1fr)", gap:20, marginInline:30}}>
      {items.map((e, index)=> (
-      <Card key={e._id} style={{ width: '18rem', marginLeft: 50,boxShadow:"0px 0px 5px 1px black",padding:20,alignItems:"center",marginTop:30}}>
+      <Card key={e._id} style={{ width: '18rem', marginLeft: 50,boxShadow:"0px 0px 5px 1px black",padding:20,display:"flex", alignItems:"center",marginTop:30}}>
         <Card.Img src={e.imagen} style={{width:250 , height:300}} />
         <Card.Body>
           <Card.Title>{e.name}</Card.Title>
@@ -68,11 +68,13 @@ const Carrito =()=>{
         </Card.Body>
       </Card>
    
-   ))}
-         <Button variant="primary"  onClick={handlerVaciarCarrito}>Vaciar carrito</Button>
-
-   </div>
+    ))}
+        <div style={{display:'flex',justifyContent:"flex-end"}}>
+         <Button style={{width:150,height:50, marginTop:10}} variant="primary"  onClick={handlerVaciarCarrito}>Vaciar carrito</Button>
+         <Button style={{width:150,height:50, marginTop:10}} variant="primary" >Comprar</Button>
+         </div>
+    </div>
       </>
-    )
+   )
 }  
 export default Carrito
